@@ -14,7 +14,7 @@ struct ExperienceDetails: View {
         var body: some View {
             ZStack {
                 ScrollView {
-                    VStack {
+                    VStack(alignment: .leading) {
                         KFImage(URL(string: experience.coverPhoto ?? "")!)
                         
                         VStack {
@@ -24,15 +24,15 @@ struct ExperienceDetails: View {
                                     .fontWeight(.heavy)
                                     .foregroundColor(.primary)
                                     .lineLimit(1)
-                                    .padding(.vertical, 15)
+                                    .padding(.vertical, 0)
                             }
-                            .frame(maxWidth: .infinity)
+//                            .frame(maxWidth: .infinity)
                             Text(experience.address ?? "")
                                 .multilineTextAlignment(.leading)
                                 .font(.body)
                                 .foregroundColor(Color.primary.opacity(0.9))
                                 .padding(.bottom, 25)
-                                .frame(maxWidth: .infinity)
+//                                .listRowInsets(EdgeInsets())
                             Spacer()
                             
                             Text("Description")
@@ -46,13 +46,19 @@ struct ExperienceDetails: View {
                                 .font(.body)
                                 .foregroundColor(Color.primary.opacity(0.9))
                                 .padding(.bottom, 25)
-                                .frame(maxWidth: .infinity)
+//                                .listRowInsets(EdgeInsets())
                         }
                         .padding(.horizontal, 20)
 
                         Spacer()
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(
+                          minWidth: 0,
+                          maxWidth: .infinity,
+                          minHeight: 0,
+                          maxHeight: .infinity,
+                          alignment: .topLeading
+                        )
                     
                 }
                 .navigationBarTitleDisplayMode(.inline)
