@@ -74,7 +74,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExperienceCollectionViewCell.identifier, for: indexPath) as! ExperienceCollectionViewCell
             cell.configure(with: viewModel.searchData[indexPath.row])
             cell.didLike = { [weak self] in
-                guard let self = self else { return }
+                guard let self = self, self.viewModel.searchData[indexPath.row].isLiked == nil else { return }
                 self.viewModel.likeExperience(with: self.viewModel.searchData[indexPath.row], isSearch: true)
             }
             return cell
@@ -95,7 +95,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 guard let self = self else { return customCell}
                 customCell.configure(with: self.viewModel.recomendedData[customIndexPath.row], hideStatusView: false)
                 customCell.didLike = { [weak self] in
-                    guard let self = self else { return }
+                    guard let self = self, self.viewModel.recomendedData[customIndexPath.row].isLiked == nil else { return }
                     self.viewModel.likeExperience(with: self.viewModel.recomendedData[customIndexPath.row], at: .recommened)
                 }
                 return customCell
@@ -117,7 +117,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExperienceCollectionViewCell.identifier, for: indexPath) as! ExperienceCollectionViewCell
             cell.configure(with: viewModel.recentData[indexPath.row])
             cell.didLike = { [weak self] in
-                guard let self = self else { return }
+                guard let self = self, self.viewModel.recentData[indexPath.row].isLiked == nil else { return }
                 self.viewModel.likeExperience(with: self.viewModel.recentData[indexPath.row], at: .recent)
             }
             return cell

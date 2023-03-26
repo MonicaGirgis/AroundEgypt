@@ -158,7 +158,7 @@ class HomeViewModel {
             guard let strongSelf = self else { return}
             switch result {
             case .success(let data):
-                let temp = Experience(id: model.id, title: model.title, coverPhoto: model.coverPhoto, description: model.description, viewsNo: model.viewsNo, likesNo: data.data, recommended: model.recommended, isLiked: "", detailedDescription: model.detailedDescription, address: model.address)
+                let temp = Experience(id: model.id, title: model.title, coverPhoto: model.coverPhoto, description: model.description, viewsNo: model.viewsNo, likesNo: data.data, recommended: model.recommended, isLiked: "true", detailedDescription: model.detailedDescription, address: model.address)
                 
                 if isSearch {
                     if let index = strongSelf.searchData.firstIndex(where: { $0.id == model.id }) {

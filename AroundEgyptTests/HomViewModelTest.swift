@@ -33,7 +33,32 @@ final class HomViewModelTest: XCTestCase {
             case .failure(_):
                 break;
             }
+        }
+    }
+    
+    func testGetRecentData_ShouldReturnSuccess() {
+        fakeHomeRepo.setTestCaseState(testCaseState: .success)
+        fakeHomeRepo.getRecentData { ressult in
             
+            switch ressult {
+            case .success(let data):
+                XCTAssertEqual(data.data.first?.id, "id")
+            case .failure(_):
+                break;
+            }
+        }
+    }
+    
+    func testGetSearchData_ShouldReturnSuccess() {
+        fakeHomeRepo.setTestCaseState(testCaseState: .success)
+        fakeHomeRepo.getSearchData { ressult in
+            
+            switch ressult {
+            case .success(let data):
+                XCTAssertEqual(data.data.first?.id, "id")
+            case .failure(_):
+                break;
+            }
         }
     }
 

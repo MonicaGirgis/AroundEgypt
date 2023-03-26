@@ -31,6 +31,26 @@ final class FakeHomeRepo {
             completion(.failure(.FlagFound(error: "error found")))
         }
     }
+    
+    func getRecentData(completion: (Result< Response<[Experience]>, APIError>)->()){
+        switch testCaseState {
+            
+        case .success:
+            completion(.success(successModdel))
+        case .fail:
+            completion(.failure(.FlagFound(error: "error found")))
+        }
+    }
+    
+    func getSearchData(completion: (Result< Response<[Experience]>, APIError>)->()){
+        switch testCaseState {
+            
+        case .success:
+            completion(.success(successModdel))
+        case .fail:
+            completion(.failure(.FlagFound(error: "error found")))
+        }
+    }
 }
 
 
