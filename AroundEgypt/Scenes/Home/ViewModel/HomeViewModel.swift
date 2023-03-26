@@ -83,28 +83,28 @@ class HomeViewModel {
 
     
     private func saveToExperienceCD() {
-        CoreDataManager.shared.addItem(entityName: String(describing: ExperienceCD.self)) { objc in
-            guard let objc = objc as? ExperienceCD else { return}
+        
+        let itemsCD = CoreDataManager.shared.getItems(entity: ExperienceCD.fetchRequest())
+        
+        var allData: [Experience] = []
+        allData.append(contentsOf: recomendedData)
+        allData.append(contentsOf: recentData)
+        
+        allData.forEach { experience in
             
-            let itemsCD = CoreDataManager.shared.getItems(entity: ExperienceCD.fetchRequest())
-            
-            var allData: [Experience] = []
-            allData.append(contentsOf: recomendedData)
-            allData.append(contentsOf: recentData)
-            
-            allData.forEach { experience in
-                
-                if let item = itemsCD?.first(where: { $0.id == experience.id }) {
-                    item.title = experience.title
-                    item.desc = experience.description
-                    item.detailedDesc = experience.detailedDescription
-                    item.coverPhoto = experience.coverPhoto
-                    item.address = experience.address
-                    item.viewNo = Int64(experience.viewsNo ?? 0)
-                    item.likesNo = Int16(experience.likesNo ?? 0)
-                    item.isRecommended  = Int16(experience.recommended ?? 0)
-                    CoreDataManager.shared.updateItem()
-                }else{
+            if let item = itemsCD?.first(where: { $0.id == experience.id }) {
+                item.title = experience.title
+                item.desc = experience.description
+                item.detailedDesc = experience.detailedDescription
+                item.coverPhoto = experience.coverPhoto
+                item.address = experience.address
+                item.viewNo = Int64(experience.viewsNo ?? 0)
+                item.likesNo = Int16(experience.likesNo ?? 0)
+                item.isRecommended  = Int16(experience.recommended ?? 0)
+                CoreDataManager.shared.updateItem()
+            }else{
+                CoreDataManager.shared.addItem(entityName: String(describing: ExperienceCD.self)) {  objc in
+                    guard let objc = objc as? ExperienceCD else { return}
                     objc.id = experience.id
                     objc.title = experience.title
                     objc.desc = experience.description
